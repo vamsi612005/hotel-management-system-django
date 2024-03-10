@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Staff</title>
+</head>
+<body>
+{% block body %}
+<h1>Update Hotel: {{ hotels.hotelname}}</h1>]
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+<a href={% url 'hotelstaffmanagementht' %} class="btn btn-primary">Go back</a>
+{% endblock %}
+</body>
+</html>

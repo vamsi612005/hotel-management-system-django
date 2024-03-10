@@ -1,0 +1,40 @@
+{% include 'navbar/hotelnavbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>view hotels</title>
+</head>
+<body>
+{% block body %}
+        <div class="container">
+                <div class="row">
+{% for hotels in hotels %}
+                  <div class="col-sm-4 mb-3">
+<div class="card" style="width: 18rem;">
+  <img src="{{ hotels.hotelimage.url }}" class="card-img-top" alt="hotel-image">
+  <div class="card-body">
+    <h5 class="card-title">{{ hotels.hotelname }}</h5>
+    <p class="card-text">{{ hotels.hoteldesc }}</p>
+      <p class="card-text">Location: {{ hotels.hotellocation }}</p>
+      <p class="card-text">Average cost per night: {{ hotels.hotelavgroomcostpn }}</p>
+      <p class="card-text">Total no. of rooms: {{ hotels.noofrooms }}</p>
+        <form method="POST" action="{% url 'updatehotel' hotels.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      <form method="POST" action="{% url 'deletehotel' %}">
+          {% csrf_token %}
+          <input type="hidden" name="obj_id" value="{{ hotels.id }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+  </div>
+</div>
+                    </div>
+{% endfor %}
+
+                </div>
+        </div>
+{% endblock %}
+</body>
+</html>
